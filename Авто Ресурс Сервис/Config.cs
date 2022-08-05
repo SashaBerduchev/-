@@ -9,7 +9,7 @@ namespace Авто_Ресурс_Сервис
     class Config
     {
         private static string connstring;
-        public static bool DEBUG_MODE = true;
+        public static bool DEBUG_MODE = false;
         public static string GetString()
         {
             if (DEBUG_MODE == true)

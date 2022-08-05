@@ -25,6 +25,7 @@ namespace Авто_Ресурс_Сервис
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Tires> tireses;
         public MainWindow()
         {
             InitializeComponent();
@@ -118,8 +119,9 @@ namespace Авто_Ресурс_Сервис
                 var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(10000));
                 if (data is Task<string>)
                 {
-                    List<Tires> news = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
-                    TiresGrid.ItemsSource = news;
+                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
+                    TiresGrid.ItemsSource = tires;
+                    tireses = tires;
                 }
 
             }
@@ -182,6 +184,27 @@ namespace Авто_Ресурс_Сервис
                 Trace.WriteLine(exp);
                 MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Config.DEBUG_MODE = false;
+            Post postprod = new Post();
+            var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+            if(data != null )
+            {
+                Config.DEBUG_MODE = true;
+                Post posttest = new Post();
+                Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
+                var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(10000));
+                if (resp is Task<string>)
+                {
+                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((resp as Task<string>).Result);
+                    TiresGrid.ItemsSource = tires;
+                    tireses = tires;
+                }
+            }
+            
         }
     }
 }
