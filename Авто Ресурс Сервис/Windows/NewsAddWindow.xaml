@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Авто_Ресурс_Сервис.Windows"
         mc:Ignorable="d"
-        Title="NewsAddWindow" Height="811.987" Width="800">
+        Title="NewsAddWindow" Height="911.987" Width="1000">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="80" Margin="35,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="715"/>
-        <TextBox HorizontalAlignment="Left" Height="80" Margin="35,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="715"/>
-        <TextBox HorizontalAlignment="Left" Height="255" Margin="35,316,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="715"/>
-        <TextBox HorizontalAlignment="Left" Height="108" Margin="35,168,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="715"/>
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="35,625,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="715"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="274,695,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
+        <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="10,59,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="AllNews" HorizontalAlignment="Stretch" Height="255" Margin="10,316,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="10,168,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="41" Margin="10,625,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="297,777,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
+        <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="297,666,0,0" VerticalAlignment="Top" Width="251" Height="36" Click="AddImage_Click" />
 
     </Grid>
 </Window>
