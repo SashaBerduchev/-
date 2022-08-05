@@ -195,7 +195,7 @@ namespace Авто_Ресурс_Сервис
             {
                 Config.DEBUG_MODE = true;
                 Post posttest = new Post();
-                Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
+                var res = Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
                 var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(10000));
                 if (resp is Task<string>)
                 {

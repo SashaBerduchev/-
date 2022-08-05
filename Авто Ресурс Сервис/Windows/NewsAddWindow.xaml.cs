@@ -29,7 +29,7 @@ namespace Авто_Ресурс_Сервис.Windows
             InitializeComponent();
         }
 
-        private string fileType = "";
+        private string fileType = "image/jpeg";
         private byte[] fileName;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -53,17 +53,17 @@ namespace Авто_Ресурс_Сервис.Windows
             fileDialog.ShowDialog();
             var fileStream = fileDialog.OpenFile();
 
-            using (StreamReader reader = new StreamReader(fileStream))
-            {
-                fileContent = reader.ReadToEnd();
-                byte[] arr = Encoding.Unicode.GetBytes(fileContent);
-                MemoryStream ms = new MemoryStream(arr);
-                fileName = ms.ToArray();
-            }
+            //using (StreamReader reader = new StreamReader(fileStream))
+            //{
+            //    fileContent = reader.ReadToEnd();
+            //    byte[] arr = Encoding.Unicode.GetBytes(fileContent);
+            //    MemoryStream ms = new MemoryStream(arr);
+            //    fileName = ms.ToArray();
+            //}
 
-            fileType = Path.GetExtension(fileDialog.FileName);
-            //byte[] bData = File.ReadAllBytes(fileDialog.FileName);
-            //fileName = bData;
+            //fileType = Path.GetExtension(fileDialog.FileName);
+            byte[] bData = File.ReadAllBytes(fileDialog.FileName);
+            fileName = bData;
             Trace.WriteLine(fileDialog);
             
         }
