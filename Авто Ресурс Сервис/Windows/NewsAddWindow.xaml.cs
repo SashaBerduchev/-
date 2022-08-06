@@ -24,9 +24,11 @@ namespace Авто_Ресурс_Сервис.Windows
     /// </summary>
     public partial class NewsAddWindow : Window
     {
-        public NewsAddWindow()
+        Window window; 
+        public NewsAddWindow(Window window)
         {
             InitializeComponent();
+            this.window = window;
         }
 
         private string fileType = "image/jpeg";
@@ -44,6 +46,7 @@ namespace Авто_Ресурс_Сервис.Windows
             var data = JsonConvert.SerializeObject(news);
             Post.Send("News", "AddNews", data);
             this.Close();
+            (window as MainWindow).GetNews();
         }
 
         private void AddImage_Click(object sender, RoutedEventArgs e)

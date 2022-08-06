@@ -88,7 +88,7 @@ namespace Авто_Ресурс_Сервис
 
         private void CreatenewsBtn_Click(object sender, RoutedEventArgs e)
         {
-            new NewsAddWindow().Show();
+            new NewsAddWindow(this).Show();
         }
 
         
