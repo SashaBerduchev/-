@@ -65,6 +65,8 @@ namespace Авто_Ресурс_Сервис.Windows
             //}
 
             //fileType = Path.GetExtension(fileDialog.FileName);
+            string filedata = fileDialog.FileName;
+            Img.Source = new BitmapImage(new Uri(filedata));
             byte[] bData = File.ReadAllBytes(fileDialog.FileName);
             fileName = bData;
             Trace.WriteLine(fileDialog);

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Авто_Ресурс_Сервис.Windows.NewsAddWindow"
+﻿<Window x:Class="Авто_Ресурс_Сервис.Windows.NewsEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,8 +11,8 @@
         <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="255" Margin="133,352,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
         <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="133,204,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
         <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="41" Margin="133,661,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="297,777,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
-        <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="297,702,0,0" VerticalAlignment="Top" Width="251" Height="36" Click="AddImage_Click" />
+        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="297,777,0,0" VerticalAlignment="Top" Width="251" Height="65"/>
+        <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="297,702,0,0" VerticalAlignment="Top" Width="251" Height="36" />
         <Image x:Name="Img" HorizontalAlignment="Left" Height="160" Margin="30,10,0,0" VerticalAlignment="Top" Width="236"/>
         <TextBlock HorizontalAlignment="Left" Margin="591,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="87" FontSize="16"><Run Text="Заголовок "/><Run Text="новини"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="446,630,0,0" TextWrapping="Wrap" Text="Посилання" VerticalAlignment="Top" Height="26" Width="122" FontSize="16"/>

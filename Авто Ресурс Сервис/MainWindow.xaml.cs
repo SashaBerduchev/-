@@ -37,7 +37,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -63,7 +63,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -97,7 +97,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetTiresClient"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("News", "GetTiresClient"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<Tires> news = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
@@ -116,7 +116,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
@@ -136,7 +136,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -163,7 +163,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -190,13 +190,13 @@ namespace Авто_Ресурс_Сервис
         {
             Config.DEBUG_MODE = false;
             Post postprod = new Post();
-            var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(10000));
+            var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
             if(data != null )
             {
                 Config.DEBUG_MODE = true;
                 Post posttest = new Post();
                 var res = Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
-                var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(10000));
+                var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(5000));
                 if (resp is Task<string>)
                 {
                     List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((resp as Task<string>).Result);
@@ -205,6 +205,13 @@ namespace Авто_Ресурс_Сервис
                 }
             }
             
+        }
+
+        private async void NewsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (NewsGrid.SelectedItem as News).NameNews), Task.Delay(5000)); 
+            News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
+            new NewsEditWindow(this, item).Show();
         }
     }
 }
