@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="NewsAddWindow" Height="911.987" Width="1000">
     <Grid>
-        <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="10,59,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="AllNews" HorizontalAlignment="Stretch" Height="255" Margin="10,316,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="10,168,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="10,59,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="255" Margin="10,316,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="10,168,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
         <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="41" Margin="10,625,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button Content="Зберегти" HorizontalAlignment="Left" Margin="297,777,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
         <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="297,666,0,0" VerticalAlignment="Top" Width="251" Height="36" Click="AddImage_Click" />
