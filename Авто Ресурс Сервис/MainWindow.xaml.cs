@@ -213,5 +213,24 @@ namespace Авто_Ресурс_Сервис
             News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
             new NewsEditWindow(this, item).Show();
         }
+
+        private async void TelegramGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(1000));
+            Trace.WriteLine(teledata);
+        }
+
+        private async void TelegramUserUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(1000));
+                TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TelegramBotUser>>((teledata as Task<string>).Result);
+            }catch(Exception exp)
+            {
+                Trace.WriteLine(exp.ToString());
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
