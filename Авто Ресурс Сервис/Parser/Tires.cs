@@ -8,6 +8,7 @@ namespace Авто_Ресурс_Сервис.Parser
 {
     class Tires
     {
+        public int id { get; set; }
         public string Name { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
