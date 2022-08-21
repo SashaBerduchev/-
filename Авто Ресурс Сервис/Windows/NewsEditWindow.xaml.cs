@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Авто_Ресурс_Сервис.Http;
 using Авто_Ресурс_Сервис.Parser;
 
 namespace Авто_Ресурс_Сервис.Windows
@@ -21,22 +24,39 @@ namespace Авто_Ресурс_Сервис.Windows
     /// </summary>
     public partial class NewsEditWindow : Window
     {
-        Window windows;
+        Window window;
         News newsadd;
         public NewsEditWindow(Window window, News news)
         {
             InitializeComponent();
-            windows = window;
+            window = window;
             newsadd = news;
             NameNews.Text = news.NameNews;
             AllNews.Text = news.AllInfo;
             BaseNews.Text = news.BaseInfo;
             LinkOnNews.Text = news.NewsLinkSrc;
+            Id.Text = news.id.ToString();
             string filedata = "img.jpg";
             File.WriteAllBytes(filedata, news.Image);
-            Img.Source = new BitmapImage(new Uri(filedata)); 
+            Img.Source = new BitmapImage(new Uri(filedata));
+            Trace.WriteLine(this);
+        }
 
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            News news = new News
+            {
+                AllInfo = AllNews.Text,
+                BaseInfo = BaseNews.Text,
+                DateTime = DateTime.Now,
+                id = Convert.ToInt32(Id.Text),
+                NameNews = NameNews.Text,
+                NewsLinkSrc = LinkOnNews.Text
+            };
+            string data = JsonConvert.SerializeObject(news);
+            var datareq = Post.Send("News", "UpdateClient", data);
+            this.Close();
+            (window as MainWindow).GetNews();
         }
     }
 }

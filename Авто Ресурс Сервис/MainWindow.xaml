@@ -26,9 +26,14 @@
         <TabControl Grid.ColumnSpan="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4">
             <TabItem x:Name="News" Header="Новини" MouseLeftButtonUp="News_MouseLeftButtonUp">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="NewsGrid" HorizontalAlignment="Stretch" Margin="0,197,0,0" VerticalAlignment="Stretch" SelectionChanged="NewsGrid_SelectionChanged" />
-                    <Button x:Name="UpdateBtn" Content="Оновити" HorizontalAlignment="Left" Margin="25,48,0,0" VerticalAlignment="Top" Width="86" Height="31" Click="UpdateBtn_Click"/>
-                    <Button x:Name="CreatenewsBtn" Content="Створити новину" HorizontalAlignment="Left" Margin="134,48,0,0" VerticalAlignment="Top" Width="123" Height="31" Click="CreatenewsBtn_Click"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="690*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="NewsGrid" HorizontalAlignment="Stretch" Margin="0,197,0,0" VerticalAlignment="Stretch"  Grid.ColumnSpan="2" SelectionChanged="NewsGrid_SelectionChanged" />
+                    <Button x:Name="UpdateBtn" Content="Оновити" HorizontalAlignment="Left" Margin="25,48,0,0" VerticalAlignment="Top" Width="86" Height="31" Click="UpdateBtn_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="CreatenewsBtn" Content="Створити новину" HorizontalAlignment="Left" Margin="37.5,48,0,0" VerticalAlignment="Top" Width="123" Height="31" Click="CreatenewsBtn_Click" Grid.Column="1"/>
+                    <TextBox x:Name="NewsCount" HorizontalAlignment="Left" Height="23" Margin="274.5,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
 
 
                 </Grid>
@@ -44,6 +49,7 @@
 
                     <DataGrid Name="TiresGrid" HorizontalAlignment="Stretch" Margin="10,132,10,10" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
                     <Button x:Name="SaveBtn" Content="Сохранить в локальную БД" Grid.Column="1" HorizontalAlignment="Left" Margin="465,29,0,0" VerticalAlignment="Top" Width="190" Height="28" Click="SaveBtn_Click"/>
+                    <TextBox x:Name="TiresCount" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="155,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
                 </Grid>
             </TabItem>
@@ -57,7 +63,7 @@
                     <Button Name="TelegramUserUpdate" Content="Оновити" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="126" Height="28" Grid.ColumnSpan="2" Click="TelegramUserUpdate_Click"/>
 
                     <DataGrid Name="TelegramGrid" HorizontalAlignment="Stretch" Margin="10,132,10,10" VerticalAlignment="Stretch" Grid.ColumnSpan="2" MouseLeftButtonUp="TelegramGrid_MouseLeftButtonUp"/>
-                    
+
 
                 </Grid>
             </TabItem>

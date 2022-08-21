@@ -29,6 +29,7 @@ namespace Авто_Ресурс_Сервис.Windows
         {
             InitializeComponent();
             this.window = window;
+            Trace.WriteLine(this);
         }
 
         private string fileType = "image/jpeg";
