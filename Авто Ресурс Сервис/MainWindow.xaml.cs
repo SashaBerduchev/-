@@ -38,14 +38,14 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(500));
-                if (data is Task<string>)
+               var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(2000));
+               if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
                     for (int i = 0; i < news.Count; i++)
                     {
                         news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
-                        news[i].AllInfo = news[i].AllInfo.Substring(0, 50) + "...";
+                        news[i].AllInfo = news[i].AllInfo.Substring(0, 30) + "...";
                         news[i].NewsLinkSrc = null;
                         news[i].ImageMimeTypeOfData = null;
                         news[i].Image = null;
@@ -65,7 +65,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(500));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(2000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -243,11 +243,17 @@ namespace Авто_Ресурс_Сервис
         }
 
 
-        private async void NewsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void NewsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (NewsGrid.SelectedItem as News).NameNews), Task.Delay(500));
-            News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
-            new NewsEditWindow(this, item).Show();
+            try
+            {
+                var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (NewsGrid.SelectedItem as News).NameNews), Task.Delay(500));
+                News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
+                new NewsEditWindow(this, item).Show();
+            }catch(Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }

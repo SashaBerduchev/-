@@ -24,21 +24,34 @@ namespace Авто_Ресурс_Сервис.Windows
     /// </summary>
     public partial class NewsEditWindow : Window
     {
-        Window window;
+        Window windows;
         News newsadd;
         public NewsEditWindow(Window window, News news)
         {
             InitializeComponent();
-            window = window;
+            windows = window;
             newsadd = news;
-            NameNews.Text = news.NameNews;
-            AllNews.Text = news.AllInfo;
-            BaseNews.Text = news.BaseInfo;
-            LinkOnNews.Text = news.NewsLinkSrc;
-            Id.Text = news.id.ToString();
-            string filedata = "img.jpg";
-            File.WriteAllBytes(filedata, news.Image);
-            Img.Source = new BitmapImage(new Uri(filedata));
+            try
+            {
+                this.NameNews.Text = news.NameNews;
+                this.AllNews.Text = news.AllInfo;
+                this.BaseNews.Text = news.BaseInfo;
+                this.LinkOnNews.Text = news.NewsLinkSrc;
+                this.Id.Text = news.id.ToString();
+                string filedata = "C:\\Users\\sasha\\OneDrive\\Изображения\\Saved Pictures\\img.jpg";
+                //using (var stream = File.Create(filedata)) {
+                //    File.WriteAllBytes(filedata, news.Image);
+                //    stream.Close();
+                //}
+                FileStream fileStream = new FileStream(filedata, FileMode.Create);
+                fileStream.Write(news.Image, 0, news.Image.Length);
+                fileStream.Close();
+                this.Img.Source = new BitmapImage(new Uri(filedata));
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.ToString(), "Error", MessageBoxButton.OK);
+            }
             Trace.WriteLine(this);
         }
 
@@ -56,7 +69,31 @@ namespace Авто_Ресурс_Сервис.Windows
             string data = JsonConvert.SerializeObject(news);
             var datareq = Post.Send("News", "UpdateClient", data);
             this.Close();
-            (window as MainWindow).GetNews();
+            (windows as MainWindow).GetNews();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Img.Source = null;
+            string filedata = "C:\\Users\\sasha\\OneDrive\\Изображения\\Saved Pictures\\img.jpg";
+            if (File.Exists(filedata))
+            {
+                try
+                {
+                    using (var stream = File.Open(filedata, FileMode.Open))
+                    {
+                        File.Delete(filedata);
+                        stream.Close();
+                    }
+                    //File.Delete(filedata);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK); 
+                    
+                }
+            }
+
         }
     }
 }
