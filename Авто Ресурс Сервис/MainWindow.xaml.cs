@@ -122,7 +122,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetTiresClient"));
+                var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"));
                 if (data is Task<string>)
                 {
                     List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
