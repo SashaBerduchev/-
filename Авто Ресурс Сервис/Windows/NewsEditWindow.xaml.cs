@@ -43,10 +43,11 @@ namespace Авто_Ресурс_Сервис.Windows
                 //    File.WriteAllBytes(filedata, news.Image);
                 //    stream.Close();
                 //}
-                FileStream fileStream = new FileStream(filedata, FileMode.Create);
+                FileStream fileStream = new FileStream(filedata, FileMode.OpenOrCreate);
                 fileStream.Write(news.Image, 0, news.Image.Length);
                 fileStream.Close();
                 this.Img.Source = new BitmapImage(new Uri(filedata));
+                filedata = null;
             }
             catch(Exception exp)
             {
@@ -74,25 +75,25 @@ namespace Авто_Ресурс_Сервис.Windows
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.Img.Source = null;
-            string filedata = "C:\\Users\\sasha\\OneDrive\\Изображения\\Saved Pictures\\img.jpg";
-            if (File.Exists(filedata))
-            {
-                try
-                {
-                    using (var stream = File.Open(filedata, FileMode.Open))
-                    {
-                        File.Delete(filedata);
-                        stream.Close();
-                    }
-                    //File.Delete(filedata);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK); 
+            //this.Img.Source = null;
+            //string filedata = "C:\\Users\\sasha\\OneDrive\\Изображения\\Saved Pictures\\img.jpg";
+            //if (File.Exists(filedata))
+            //{
+            //    try
+            //    {
+            //        //using (var stream = File.Open(filedata, FileMode.Open))
+            //        //{
+            //        //    File.Delete(filedata);
+            //        //    stream.Close();
+            //        //}
+            //        File.Delete(filedata);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK); 
                     
-                }
-            }
+            //    }
+            //}
 
         }
     }
