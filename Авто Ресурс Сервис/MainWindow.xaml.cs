@@ -153,25 +153,25 @@ namespace Авто_Ресурс_Сервис
             GetTires();
         }
 
-        private async void SaveBtn_Click(object sender, RoutedEventArgs e)
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Config.DEBUG_MODE = false;
-            Post postprod = new Post();
-            var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(500));
-            if (data != null)
-            {
-                Config.DEBUG_MODE = true;
-                Post posttest = new Post();
-                var res = Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
-                var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(500));
-                if (resp is Task<string>)
-                {
-                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((resp as Task<string>).Result);
-                    TiresGrid.ItemsSource = tires;
-                    TiresCount.Text = tires.Count.ToString();
-                    tireses = tires;
-                }
-            }
+            //Config.DEBUG_MODE = false;
+            //Post postprod = new Post();
+            //var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(500));
+            //if (data != null)
+            //{
+            //    Config.DEBUG_MODE = true;
+            //    Post posttest = new Post();
+            //    var res = Post.Send("Tires", "SaveAllClientTires", (data as Task<string>).Result);
+            //    var resp = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(500));
+            //    if (resp is Task<string>)
+            //    {
+            //        List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((resp as Task<string>).Result);
+            //        TiresGrid.ItemsSource = tires;
+            //        TiresCount.Text = tires.Count.ToString();
+            //        tireses = tires;
+            //    }
+            //}
 
         }
 
@@ -187,7 +187,12 @@ namespace Авто_Ресурс_Сервис
             Trace.WriteLine(teledata);
         }
 
-        private async void TelegramUserUpdate_Click(object sender, RoutedEventArgs e)
+        private void TelegramUserUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTgUser();
+        }
+
+        public async Task UpdateTgUser()
         {
             try
             {
@@ -201,8 +206,13 @@ namespace Авто_Ресурс_Сервис
             }
         }
 
+        private void NewsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OpenNewsEditWindow();
+            
+        }
 
-        private async void NewsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async Task OpenNewsEditWindow()
         {
             try
             {
@@ -214,6 +224,7 @@ namespace Авто_Ресурс_Сервис
             {
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
             }
+
         }
     }
 }
