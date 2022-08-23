@@ -38,10 +38,13 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-               var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(2000));
-               if (data is Task<string>)
+                Task data = await Task.WhenAny(Post.Send("News", "GetNews"));
+                if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
+                    //Task.WaitAny(data);
+                    data.Dispose();
+                    data = null;
                     for (int i = 0; i < news.Count; i++)
                     {
                         news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
@@ -52,6 +55,7 @@ namespace Авто_Ресурс_Сервис
                     }
                     NewsCount.Text = news.Count.ToString();
                     NewsGrid.ItemsSource = news;
+
                 }
 
             }
@@ -65,7 +69,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(2000));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
@@ -106,7 +110,7 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetTiresClient"), Task.Delay(500));
+                var data = await Task.WhenAny(Post.Send("News", "GetTiresClient"));
                 if (data is Task<string>)
                 {
                     List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
@@ -205,7 +209,7 @@ namespace Авто_Ресурс_Сервис
             Config.DEBUG_MODE = false;
             Post postprod = new Post();
             var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(500));
-            if(data != null )
+            if (data != null)
             {
                 Config.DEBUG_MODE = true;
                 Post posttest = new Post();
@@ -219,10 +223,10 @@ namespace Авто_Ресурс_Сервис
                     tireses = tires;
                 }
             }
-            
+
         }
 
-       
+
         private async void TelegramGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(500));
@@ -235,7 +239,8 @@ namespace Авто_Ресурс_Сервис
             {
                 var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(500));
                 TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TelegramBotUser>>((teledata as Task<string>).Result);
-            }catch(Exception exp)
+            }
+            catch (Exception exp)
             {
                 Trace.WriteLine(exp.ToString());
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -250,7 +255,8 @@ namespace Авто_Ресурс_Сервис
                 var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (NewsGrid.SelectedItem as News).NameNews), Task.Delay(500));
                 News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
                 new NewsEditWindow(this, item).Show();
-            }catch(Exception exp)
+            }
+            catch (Exception exp)
             {
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
             }
