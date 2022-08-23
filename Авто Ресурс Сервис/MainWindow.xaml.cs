@@ -34,7 +34,7 @@ namespace Авто_Ресурс_Сервис
             Trace.WriteLine(this);
         }
 
-        public async void GetNews()
+        public async Task GetNews()
         {
             try
             {
@@ -65,7 +65,13 @@ namespace Авто_Ресурс_Сервис
                 MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private async void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GetBtnNews();
+            
+        }
+
+        private async Task GetBtnNews()
         {
             try
             {
@@ -106,7 +112,13 @@ namespace Авто_Ресурс_Сервис
         //    new NewsEditWindow(this, item).Show();
         //}
 
-        private async void Tires_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Tires_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            GetTires();
+            
+        }
+
+        private async Task GetTires()
         {
             try
             {
@@ -126,82 +138,19 @@ namespace Авто_Ресурс_Сервис
             }
         }
 
-        private async void Tires_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Tires_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"), Task.Delay(500));
-                if (data is Task<string>)
-                {
-                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
-                    TiresGrid.ItemsSource = tires;
-                    TiresCount.Text = tires.Count.ToString();
-                    tireses = tires;
-                }
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp);
-                MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            GetTires();
         }
 
-        private async void News_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void News_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(000));
-                if (data is Task<string>)
-                {
-                    List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
-                    for (int i = 0; i < news.Count; i++)
-                    {
-                        news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
-                        news[i].AllInfo = news[i].AllInfo.Substring(0, 50) + "...";
-                        news[i].NewsLinkSrc = null;
-                        news[i].ImageMimeTypeOfData = null;
-                        news[i].Image = null;
-                    }
-                    NewsGrid.ItemsSource = news;
-                    NewsCount.Text = news.Count.ToString();
-
-                }
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp);
-                MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            GetBtnNews();
         }
 
-        private async void TiresUpdate_Click(object sender, RoutedEventArgs e)
+        private void TiresUpdate_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
-                if (data is Task<string>)
-                {
-                    List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
-                    for (int i = 0; i < news.Count; i++)
-                    {
-                        news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
-                        news[i].AllInfo = news[i].AllInfo.Substring(0, 50) + "...";
-                        news[i].NewsLinkSrc = null;
-                        news[i].ImageMimeTypeOfData = null;
-                        news[i].Image = null;
-                    }
-                    NewsGrid.ItemsSource = news;
-                    NewsCount.Text = news.Count.ToString();
-                }
-
-            }
-            catch (Exception exp)
-            {
-                Trace.WriteLine(exp);
-                MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            GetTires();
         }
 
         private async void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -227,7 +176,12 @@ namespace Авто_Ресурс_Сервис
         }
 
 
-        private async void TelegramGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void TelegramGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GetTgUser();
+        }
+
+        private async Task GetTgUser()
         {
             var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(500));
             Trace.WriteLine(teledata);
