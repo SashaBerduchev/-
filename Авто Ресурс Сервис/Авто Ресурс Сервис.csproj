@@ -64,6 +64,10 @@
     </ApplicationDefinition>
     <Compile Include="Parser\TelegramBotUser.cs" />
     <Compile Include="Parser\Tires.cs" />
+    <Compile Include="Parser\TiresImage.cs" />
+    <Compile Include="Windows\AddTiresPicWindow.xaml.cs">
+      <DependentUpon>AddTiresPicWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewsAddWindow.xaml.cs">
       <DependentUpon>NewsAddWindow.xaml</DependentUpon>
     </Compile>
@@ -84,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\AddTiresPicWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\NewsAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

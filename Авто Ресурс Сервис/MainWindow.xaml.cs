@@ -226,5 +226,38 @@ namespace Авто_Ресурс_Сервис
             }
 
         }
+
+        private void AddPictWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new AddTiresPicWindow(this).Show();
+        }
+
+        private void UpdatePictures_Click(object sender, RoutedEventArgs e)
+        {
+            GetTiresPic();
+        }
+
+        private void TiresPicture_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GetTiresPic();
+            
+        }
+
+        public async Task GetTiresPic()
+        {
+            try
+            {
+                var tires = await Task.WhenAny(Post.Send("TiresImages", "GetTiresPict"));
+                if (tires is Task<string>)
+                {
+                    List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>((tires as Task<string>).Result);
+                    TiresPictGrid.ItemsSource = tiresImages;
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
+        }
     }
 }
