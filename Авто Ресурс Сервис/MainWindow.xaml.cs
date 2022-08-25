@@ -259,5 +259,40 @@ namespace Авто_Ресурс_Сервис
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
             }
         }
+
+        private void UpdateBrend_Click(object sender, RoutedEventArgs e)
+        {
+            GetBrend();
+        }
+
+        private async Task GetBrend()
+        {
+            try
+            {
+                var tires = await Task.WhenAny(Post.Send("Brends", "GetBrends"));
+                if (tires is Task<string>)
+                {
+                    List<Brends> brends = JsonConvert.DeserializeObject<List<Brends>>((tires as Task<string>).Result);
+                    for (int i = 0;  i < brends.Count; i++)
+                    {
+                        if (brends[i].Information.Length > 200)
+                        {
+                            brends[i].Information = brends[i].Information.Substring(0, 200) + "...";
+                        }
+                            
+                    }
+                    BrendstGrid.ItemsSource = brends;
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void BrendsTab_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GetBrend();
+        }
     }
 }
