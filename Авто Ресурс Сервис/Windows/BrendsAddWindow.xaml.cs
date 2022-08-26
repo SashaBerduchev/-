@@ -40,7 +40,6 @@ namespace Авто_Ресурс_Сервис.Windows
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
             var fileStream = fileDialog.OpenFile();
-
             string filedata = fileDialog.FileName;
             Img.Source = new BitmapImage(new Uri(filedata));
             byte[] bData = File.ReadAllBytes(fileDialog.FileName);
@@ -58,7 +57,7 @@ namespace Авто_Ресурс_Сервис.Windows
             string str = JsonConvert.SerializeObject(brends);
             Post.Send("Brends", "SaveBrends", str);
             this.Close();
-            (window as MainWindow).GetTiresPic();
+            (window as MainWindow).GetBrend();
         }
     }
 }

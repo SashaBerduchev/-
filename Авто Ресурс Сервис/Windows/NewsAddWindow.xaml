@@ -8,16 +8,16 @@
         Title="NewsAddWindow" Height="737.987" Width="1000">
     <Grid Margin="0,0,0,3">
         <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="352,44,28.6,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="169" Margin="69,307,73,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
-        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="69,158,73,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="169" Margin="69,332,73,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="69,189,73,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
         <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="42" Margin="157,532,96,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button Content="Зберегти" HorizontalAlignment="Left" Margin="341,630,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
         <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="341,579,0,0" VerticalAlignment="Top" Width="251" Height="36" Click="AddImage_Click" />
         <Image x:Name="Img" HorizontalAlignment="Left" Height="160" Margin="30,10,0,0" VerticalAlignment="Top" Width="236"/>
         <TextBlock HorizontalAlignment="Left" Margin="572,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="87" FontSize="16"><Run Text="Заголовок "/><Run Text="новини"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="470,506,0,0" TextWrapping="Wrap" Text="Посилання" VerticalAlignment="Top" Height="26" Width="122" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="446,271,0,0" TextWrapping="Wrap" Text="Повна інформація" VerticalAlignment="Top" Height="30" Width="160" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="398,129,0,0" TextWrapping="Wrap" Text="Базова інформація" VerticalAlignment="Top" Height="24" Width="170" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="454,297,0,0" TextWrapping="Wrap" Text="Повна інформація" VerticalAlignment="Top" Height="30" Width="160" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="402,153,0,0" TextWrapping="Wrap" Text="Базова інформація" VerticalAlignment="Top" Height="24" Width="170" FontSize="16"/>
 
     </Grid>
 </Window>

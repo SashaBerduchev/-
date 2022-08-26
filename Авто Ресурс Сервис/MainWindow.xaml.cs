@@ -47,8 +47,14 @@ namespace Авто_Ресурс_Сервис
                     data = null;
                     for (int i = 0; i < news.Count; i++)
                     {
-                        news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
-                        news[i].AllInfo = news[i].AllInfo.Substring(0, 30) + "...";
+                        if(news[i].BaseInfo.Length > 20)
+                        {
+                            news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
+                        }
+                        if(news[i].AllInfo.Length > 30)
+                        {
+                            news[i].AllInfo = news[i].AllInfo.Substring(0, 30) + "...";
+                        }
                         news[i].NewsLinkSrc = null;
                         news[i].ImageMimeTypeOfData = null;
                         news[i].Image = null;
@@ -63,6 +69,7 @@ namespace Авто_Ресурс_Сервис
             {
                 Trace.WriteLine(exp);
                 MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(exp.ToString(), "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
@@ -265,7 +272,7 @@ namespace Авто_Ресурс_Сервис
             GetBrend();
         }
 
-        private async Task GetBrend()
+        public async Task GetBrend()
         {
             try
             {
