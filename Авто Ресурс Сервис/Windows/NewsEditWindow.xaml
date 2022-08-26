@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Авто_Ресурс_Сервис.Windows"
         mc:Ignorable="d"
-        Title="NewsAddWindow" Height="911.987" Width="1000" Closed="Window_Closed">
+        Title="NewsAddWindow" Height="711.987" Width="1000" Closed="Window_Closed">
     <Grid>
-        <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="371,59,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="255" Margin="133,352,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
-        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="133,204,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
-        <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="41" Margin="133,661,121,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="297,777,0,0" VerticalAlignment="Top" Width="251" Height="65" Click="Button_Click"/>
-        <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="297,702,0,0" VerticalAlignment="Top" Width="251" Height="36" />
+        <TextBox x:Name="NameNews" HorizontalAlignment="Stretch" Height="80" Margin="373,44,8,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="AllNews"  HorizontalAlignment="Stretch" Height="171" Margin="133,323,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="BaseNews" HorizontalAlignment="Stretch" Height="108" Margin="139,175,4,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="LinkOnNews" HorizontalAlignment="Stretch" Height="41" Margin="155,530,99,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="321,623,0,0" VerticalAlignment="Top" Width="251" Height="43" Click="Button_Click"/>
+        <Button x:Name="AddImage" Content="Додати зображення" HorizontalAlignment="Left" Margin="339,571,0,0" VerticalAlignment="Top" Width="251" Height="36" />
         <Image x:Name="Img" HorizontalAlignment="Left" Height="160" Margin="30,10,0,0" VerticalAlignment="Top" Width="236"/>
-        <TextBlock HorizontalAlignment="Left" Margin="591,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="87" FontSize="16"><Run Text="Заголовок "/><Run Text="новини"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="446,630,0,0" TextWrapping="Wrap" Text="Посилання" VerticalAlignment="Top" Height="26" Width="122" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="446,317,0,0" TextWrapping="Wrap" Text="Повна інформація" VerticalAlignment="Top" Height="30" Width="160" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="462,175,0,0" TextWrapping="Wrap" Text="Базова інформація" VerticalAlignment="Top" Height="24" Width="170" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="593,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="29" Width="87" FontSize="16"><Run Text="Заголовок "/><Run Text="новини"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="468,499,0,0" TextWrapping="Wrap" Text="Посилання" VerticalAlignment="Top" Height="26" Width="122" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="446,288,0,0" TextWrapping="Wrap" Text="Повна інформація" VerticalAlignment="Top" Height="30" Width="160" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="468,146,0,0" TextWrapping="Wrap" Text="Базова інформація" VerticalAlignment="Top" Height="24" Width="170" FontSize="16"/>
         <TextBox x:Name="Id" HorizontalAlignment="Left" Height="23" Margin="843,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
