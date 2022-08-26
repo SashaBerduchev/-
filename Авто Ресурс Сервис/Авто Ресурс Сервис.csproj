@@ -66,6 +66,7 @@
     <Compile Include="Parser\TelegramBotUser.cs" />
     <Compile Include="Parser\Tires.cs" />
     <Compile Include="Parser\TiresImage.cs" />
+    <Compile Include="Parser\TiresInformation.cs" />
     <Compile Include="Windows\AddTiresPicWindow.xaml.cs">
       <DependentUpon>AddTiresPicWindow.xaml</DependentUpon>
     </Compile>

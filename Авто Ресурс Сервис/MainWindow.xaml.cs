@@ -47,11 +47,11 @@ namespace Авто_Ресурс_Сервис
                     data = null;
                     for (int i = 0; i < news.Count; i++)
                     {
-                        if(news[i].BaseInfo.Length > 20)
+                        if (news[i].BaseInfo.Length > 20)
                         {
                             news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
                         }
-                        if(news[i].AllInfo.Length > 30)
+                        if (news[i].AllInfo.Length > 30)
                         {
                             news[i].AllInfo = news[i].AllInfo.Substring(0, 30) + "...";
                         }
@@ -75,21 +75,27 @@ namespace Авто_Ресурс_Сервис
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             GetBtnNews();
-            
+
         }
 
         private async Task GetBtnNews()
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"));
+                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
                     for (int i = 0; i < news.Count; i++)
                     {
-                        news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
-                        news[i].AllInfo = news[i].AllInfo.Substring(0, 50) + "...";
+                        if (news[i].BaseInfo.Length > 20)
+                        {
+                            news[i].BaseInfo = news[i].BaseInfo.Substring(0, 20) + "...";
+                        }
+                        if (news[i].AllInfo.Length > 40)
+                        {
+                            news[i].AllInfo = news[i].AllInfo.Substring(0, 40) + "...";
+                        }
                         news[i].NewsLinkSrc = null;
                         news[i].ImageMimeTypeOfData = null;
                         news[i].Image = null;
@@ -103,6 +109,7 @@ namespace Авто_Ресурс_Сервис
             {
                 Trace.WriteLine(exp);
                 MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(exp.ToString(), "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -122,7 +129,7 @@ namespace Авто_Ресурс_Сервис
         private void Tires_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             GetTires();
-            
+
         }
 
         private async Task GetTires()
@@ -135,6 +142,7 @@ namespace Авто_Ресурс_Сервис
                     List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
                     TiresGrid.ItemsSource = tires;
                     TiresCount.Text = tires.Count.ToString();
+                    BrendName.ItemsSource = tires.Select(x => x.Name).ToList();
                 }
 
             }
@@ -216,7 +224,7 @@ namespace Авто_Ресурс_Сервис
         private void NewsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenNewsEditWindow();
-            
+
         }
 
         private async Task OpenNewsEditWindow()
@@ -247,14 +255,14 @@ namespace Авто_Ресурс_Сервис
         private void TiresPicture_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             GetTiresPic();
-            
+
         }
 
         public async Task GetTiresPic()
         {
             try
             {
-                var tires = await Task.WhenAny(Post.Send("TiresImages", "GetTiresPict"));
+                var tires = await Task.WhenAny(Post.Send("TiresImages", "GetTiresPict"), Task.Delay(5000));
                 if (tires is Task<string>)
                 {
                     List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>((tires as Task<string>).Result);
@@ -280,13 +288,13 @@ namespace Авто_Ресурс_Сервис
                 if (tires is Task<string>)
                 {
                     List<Brends> brends = JsonConvert.DeserializeObject<List<Brends>>((tires as Task<string>).Result);
-                    for (int i = 0;  i < brends.Count; i++)
+                    for (int i = 0; i < brends.Count; i++)
                     {
                         if (brends[i].Information.Length > 200)
                         {
                             brends[i].Information = brends[i].Information.Substring(0, 200) + "...";
                         }
-                            
+
                     }
                     BrendstGrid.ItemsSource = brends;
                 }
@@ -306,6 +314,63 @@ namespace Авто_Ресурс_Сервис
         private void AddBrend_Click(object sender, RoutedEventArgs e)
         {
             new BrendsAddWindow(this).Show();
+        }
+
+        private void BrendName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GetTiresFilterBrendClient();
+        }
+
+        private async Task GetTiresFilterBrendClient()
+        {
+            try
+            {
+                var tires = await Task.WhenAny(Post.Send("Tires", "GetBrendClientTires", BrendName.SelectedItem.ToString())); ;
+                if (tires is Task<string>)
+                {
+                    List<Tires> tire = JsonConvert.DeserializeObject<List<Tires>>((tires as Task<string>).Result);
+                    TiresGrid.ItemsSource = tire;
+                    TiresCount.Text = tire.Count.ToString();
+                    //BrendName.ItemsSource = tire.Select(x => x.Name).ToList();
+                }
+
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp);
+                MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void UpdaeTireInfo_Click(object sender, RoutedEventArgs e)
+        {
+            GetTiresInfo();
+        }
+
+        private async Task GetTiresInfo()
+        {
+            try
+            {
+                var tires = await Task.WhenAny(Post.Send("TiresInformations", "GetTiresInfo"));
+                if (tires is Task<string>)
+                {
+                    List<TiresInformation> tire = JsonConvert.DeserializeObject<List<TiresInformation>>((tires as Task<string>).Result);
+                    TiresInfo.ItemsSource = tire;
+                    //TiresCount.Text = tire.Count.ToString();
+                    //BrendName.ItemsSource = tire.Select(x => x.Name).ToList();
+                }
+
+            }
+            catch (Exception exp)
+            {
+                Trace.WriteLine(exp);
+                MessageBox.Show("Не вдається під'єднатися до сервера", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void TiresInformation_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            GetTiresInfo();
         }
     }
 }
