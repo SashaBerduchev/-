@@ -75,6 +75,7 @@
 
                     <Button Name="UpdateBrend" Content="Оновити" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="126" Height="28" Grid.ColumnSpan="2" Click="UpdateBrend_Click"  />
                     <DataGrid Name="BrendstGrid" HorizontalAlignment="Stretch" Margin="10,132,10,10" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
+                    <Button x:Name="AddBrend" Content="Додати бренд" Grid.Column="1" HorizontalAlignment="Left" Margin="106,29,0,0" VerticalAlignment="Top" Width="115" Height="28" Click="AddBrend_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="Telegram" Header="Telegram" Margin="-2,0,-21,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" MouseLeftButtonDown="Tires_MouseLeftButtonDown">

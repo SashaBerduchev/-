@@ -287,12 +287,18 @@ namespace Авто_Ресурс_Сервис
             catch (Exception exp)
             {
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+                MessageBox.Show(exp.ToString(), "Error", MessageBoxButton.OK);
             }
         }
 
         private void BrendsTab_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             GetBrend();
+        }
+
+        private void AddBrend_Click(object sender, RoutedEventArgs e)
+        {
+            new BrendsAddWindow(this).Show();
         }
     }
 }

@@ -69,6 +69,9 @@
     <Compile Include="Windows\AddTiresPicWindow.xaml.cs">
       <DependentUpon>AddTiresPicWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\BrendsAddWindow.xaml.cs">
+      <DependentUpon>BrendsAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewsAddWindow.xaml.cs">
       <DependentUpon>NewsAddWindow.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\AddTiresPicWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BrendsAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
