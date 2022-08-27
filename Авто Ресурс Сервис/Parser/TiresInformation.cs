@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Авто_Ресурс_Сервис.Parser
 {
-    class TiresInformation
+    public class TiresInformation
     {
         public int id { get; set; }
         public string NameTire { get; set; }

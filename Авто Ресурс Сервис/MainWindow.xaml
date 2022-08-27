@@ -89,7 +89,7 @@
                     <Button Name="UpdaeTireInfo" Content="Оновити" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="126" Height="28" Grid.ColumnSpan="2" Click="UpdaeTireInfo_Click"  />
 
                     <DataGrid Name="TiresInfo" HorizontalAlignment="Stretch" Margin="10,132,10,10" VerticalAlignment="Stretch" Grid.ColumnSpan="2" MouseLeftButtonUp="TelegramGrid_MouseLeftButtonUp"/>
-                    <Button x:Name="AddTiresWindows" Content="Додати" Grid.Column="1" HorizontalAlignment="Left" Margin="66,29,0,0" VerticalAlignment="Top" Width="96" Height="32" />
+                    <Button x:Name="AddTiresWindows" Content="Додати" Grid.Column="1" HorizontalAlignment="Left" Margin="66,29,0,0" VerticalAlignment="Top" Width="96" Height="32" Click="AddTiresWindows_Click" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="Telegram" Header="Telegram" Margin="-2,0,-21,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" MouseLeftButtonDown="Tires_MouseLeftButtonDown">

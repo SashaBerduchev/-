@@ -347,7 +347,7 @@ namespace Авто_Ресурс_Сервис
             GetTiresInfo();
         }
 
-        private async Task GetTiresInfo()
+        public async Task GetTiresInfo()
         {
             try
             {
@@ -371,6 +371,25 @@ namespace Авто_Ресурс_Сервис
         private void TiresInformation_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             GetTiresInfo();
+        }
+
+        private void AddTiresWindows_Click(object sender, RoutedEventArgs e)
+        {
+            TiresInfoWindowOpen();
+        }
+
+        private async Task TiresInfoWindowOpen()
+        {
+            try
+            {
+                var news = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"));
+                List<Tires> item = JsonConvert.DeserializeObject<List<Tires>>((news as Task<string>).Result);
+                new AddTireInfoWindow(this, item).Show();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }
