@@ -1,0 +1,16 @@
+﻿<Window x:Class="Авто_Ресурс_Сервис.Windows.TiresInfoEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Авто_Ресурс_Сервис.Windows"
+        mc:Ignorable="d"
+        Title="TiresInfoEditWindow" Height="650" Width="500">
+    <Grid>
+        <TextBlock x:Name="NameTire" FontSize="20" HorizontalAlignment="Left" Margin="227,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="181"/>
+        <TextBlock x:Name="TypeTire" FontSize="20" HorizontalAlignment="Left" Margin="227,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="181"/>
+        <Button Name="Save" Content="Зберегти" HorizontalAlignment="Left" Margin="227,463,0,0" VerticalAlignment="Top" Width="99" Height="46" Click="Save_Click"/>
+        <TextBox Name="InfoText" HorizontalAlignment="Left" Height="168" Margin="10,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="480" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True"/>
+
+    </Grid>
+</Window>

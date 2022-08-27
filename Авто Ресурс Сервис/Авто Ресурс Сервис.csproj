@@ -82,6 +82,9 @@
     <Compile Include="Windows\NewsEditWindow.xaml.cs">
       <DependentUpon>NewsEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TiresInfoEditWindow.xaml.cs">
+      <DependentUpon>TiresInfoEditWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewsEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TiresInfoEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

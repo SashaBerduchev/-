@@ -355,9 +355,17 @@ namespace Авто_Ресурс_Сервис
                 if (tires is Task<string>)
                 {
                     List<TiresInformation> tire = JsonConvert.DeserializeObject<List<TiresInformation>>((tires as Task<string>).Result);
+                    for (int i = 0; i < tire.Count; i++)
+                    {
+                        if (tire[i].Info.Length > 50)
+                        {
+                            tire[i].Info = tire[i].Info.Substring(0, 50)+"...";
+                        }
+                    }
                     TiresInfo.ItemsSource = tire;
                     //TiresCount.Text = tire.Count.ToString();
                     //BrendName.ItemsSource = tire.Select(x => x.Name).ToList();
+                    tires.Dispose();
                 }
 
             }
@@ -389,6 +397,30 @@ namespace Авто_Ресурс_Сервис
             catch (Exception exp)
             {
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void TiresInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            GetEditTireInfo();
+        }
+
+        private async Task GetEditTireInfo()
+        {
+            try
+            {
+                Task data = await Task.WhenAny(Post.Send("TiresInformations", "GetTireInfoSelect", JsonConvert.SerializeObject(TiresInfo.SelectedItem as TiresInformation)));
+                if(data is Task<string>)
+                {
+                    TiresInformation tiresInformation = JsonConvert.DeserializeObject<TiresInformation>((data as Task<string>).Result);
+                    new TiresInfoEditWindow(this, tiresInformation).Show();
+                }
+                
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+                MessageBox.Show(exp.ToString(), "Error", MessageBoxButton.OK);
             }
         }
     }
