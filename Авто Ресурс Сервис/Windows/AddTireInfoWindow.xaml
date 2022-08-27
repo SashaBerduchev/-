@@ -9,7 +9,7 @@
     <Grid>
         <ComboBox Name="BrendCombo" HorizontalAlignment="Left" Margin="172,43,0,0" VerticalAlignment="Top" Width="191" Height="35"/>
         <ComboBox Name="TypeCombo" HorizontalAlignment="Left" Margin="172,122,0,0" VerticalAlignment="Top" Width="191" Height="33"/>
-        <TextBox x:Name="InfoText" HorizontalAlignment="Left" Height="210" Margin="10,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="455"/>
+        <TextBox x:Name="InfoText" HorizontalAlignment="Left" Height="210" Margin="10,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="455" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True"/>
         <Button x:Name="Save" Content="Зберегти" HorizontalAlignment="Left" Margin="217,408,0,0" VerticalAlignment="Top" Width="91" Height="38" Click="Save_Click"/>
     </Grid>
 </Window>
