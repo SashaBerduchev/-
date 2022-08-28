@@ -12,7 +12,7 @@ namespace Авто_Ресурс_Сервис
         public static string DEBUG_MODE;
         public static string GetString()
         {
-            if (DEBUG_MODE == "true")
+            if (DEBUG_MODE == "false")
             {
                 connstring = "https://localhost:44314/";
             }
