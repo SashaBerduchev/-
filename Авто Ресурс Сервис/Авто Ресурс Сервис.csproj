@@ -89,6 +89,9 @@
     <Compile Include="Windows\NewsReLoadWindow.xaml.cs">
       <DependentUpon>NewsReLoadWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TiresImagesReLoadWindow.xaml.cs">
+      <DependentUpon>TiresImagesReLoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TiresInfoEditWindow.xaml.cs">
       <DependentUpon>TiresInfoEditWindow.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewsReLoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TiresImagesReLoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

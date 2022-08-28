@@ -39,16 +39,22 @@ namespace Авто_Ресурс_Сервис.Windows
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            
-            if(Config.DEBUG_MODE == "true")
-            for (int i = 0; i < newsese.Count; i++)
+            try {
+                if (Config.DEBUG_MODE == "true")
+                {
+                    for (int i = 0; i < newsese.Count; i++)
+                    {
+                        var datas = JsonConvert.SerializeObject(newsese[i]);
+                        newsese[i].id = null;
+                        Post.Send("News", "AddNews", datas);
+                    }
+                }
+                this.Close();
+                //(windows as MainWindow).GetNews();
+            } catch (Exception exp)
             {
-                var datas = JsonConvert.SerializeObject(newsese[i]);
-                Post.Send("News", "AddNews", datas);
+                MessageBox.Show(exp.Message, "Error", MessageBoxButton.OK);
             }
-            
-            this.Close();
-            //(windows as MainWindow).GetNews();
         }
 
         private void TypeMode_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -28,10 +28,11 @@ namespace Авто_Ресурс_Сервис
         private List<Tires> tireses;
         private List<News> newsfromprod;
         private List<Brends> brendfromprod;
+        private List<TiresImage> tiresImagesprod;
         public MainWindow()
         {
             InitializeComponent();
-            Config.DEBUG_MODE = "false";
+            Config.DEBUG_MODE = "true";
             Post post = new Post(this);
             GetNews();
             TypeMode.Items.Add("false");
@@ -274,6 +275,7 @@ namespace Авто_Ресурс_Сервис
                 {
                     List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>((tires as Task<string>).Result);
                     TiresPictGrid.ItemsSource = tiresImages;
+                    tiresImagesprod = tiresImages;
                 }
             }
             catch (Exception exp)
@@ -453,6 +455,11 @@ namespace Авто_Ресурс_Сервис
         private void TestSave_Click(object sender, RoutedEventArgs e)
         {
             new BrendReLoadWindow(brendfromprod).Show();
+        }
+
+        private void ImagesTireSaveLocal_Click(object sender, RoutedEventArgs e)
+        {
+            new TiresImagesReLoadWindow(tiresImagesprod).Show();
         }
     }
 }

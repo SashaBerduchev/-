@@ -2,7 +2,6 @@
 {
     public class TiresImage
     {
-        public int id { get; set; }
         public string NameTire { get; set; }
         public string TypeTire { get; set; }
         public string Articul { get; set; }

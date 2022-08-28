@@ -68,6 +68,7 @@
 
                     <DataGrid Name="TiresPictGrid" HorizontalAlignment="Stretch" Margin="10,132,10,10" VerticalAlignment="Stretch" Grid.ColumnSpan="2" MouseLeftButtonUp="TelegramGrid_MouseLeftButtonUp"/>
                     <Button x:Name="AddPictWindow" Content="Додати" Grid.Column="1" HorizontalAlignment="Left" Margin="66,29,0,0" VerticalAlignment="Top" Width="96" Height="32" Click="AddPictWindow_Click"/>
+                    <Button x:Name="ImagesTireSaveLocal" Grid.Column="1" Content="Бекап" HorizontalAlignment="Left" Margin="210,23,0,0" VerticalAlignment="Top" Height="34" Width="97" Click="ImagesTireSaveLocal_Click"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="BrendsTab" Header="Бренди" Margin="-2,0,-21,0" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" MouseLeftButtonUp="BrendsTab_MouseLeftButtonUp" >

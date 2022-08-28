@@ -9,10 +9,10 @@ namespace Авто_Ресурс_Сервис
     class Config
     {
         public static string connstring;
-        public static string DEBUG_MODE;
+        public static string DEBUG_MODE = "false";
         public static string GetString()
         {
-            if (DEBUG_MODE == "false")
+            if (DEBUG_MODE == "true")
             {
                 connstring = "https://localhost:44314/";
             }
