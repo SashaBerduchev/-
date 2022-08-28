@@ -58,19 +58,25 @@ namespace Авто_Ресурс_Сервис.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            News news = new News
+            try
             {
-                AllInfo = AllNews.Text,
-                BaseInfo = BaseNews.Text,
-                DateTime = DateTime.Now,
-                id = Convert.ToInt32(Id.Text),
-                NameNews = NameNews.Text,
-                NewsLinkSrc = LinkOnNews.Text
-            };
-            string data = JsonConvert.SerializeObject(news);
-            var datareq = Post.Send("News", "UpdateClient", data);
-            this.Close();
-            (windows as MainWindow).GetNews();
+                News news = new News
+                {
+                    AllInfo = AllNews.Text,
+                    BaseInfo = BaseNews.Text,
+                    DateTime = DateTime.Now,
+                    id = newsadd.id,
+                    NameNews = NameNews.Text,
+                    NewsLinkSrc = LinkOnNews.Text
+                };
+                string data = JsonConvert.SerializeObject(news);
+                var datareq = Post.Send("News", "UpdateClient", data);
+                this.Close();
+                (windows as MainWindow).GetNews();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButton.OK);
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
