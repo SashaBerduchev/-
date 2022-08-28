@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Авто_Ресурс_Сервис.Parser
 {
-    class Brends
+    public class Brends
     {
-        public int id { get; set; }
         public string Name { get; set; }
         public string Information { get; set; }
         public bool OnMain { get; set; }

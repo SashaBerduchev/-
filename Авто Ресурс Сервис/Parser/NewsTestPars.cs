@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Авто_Ресурс_Сервис.Parser
 {
-    public class News
+    internal class NewsTestPars
     {
-        //public int id { get; set; }
         public string NameNews { get; set; }
         public string BaseInfo { get; set; }
         public string AllInfo { get; set; }
@@ -16,6 +15,5 @@ namespace Авто_Ресурс_Сервис.Parser
         public DateTime DateTime { get; set; }
         public byte[] Image { get; set; }
         public string ImageMimeTypeOfData { get; set; }
-
     }
 }

@@ -8,11 +8,11 @@ namespace Авто_Ресурс_Сервис
 {
     class Config
     {
-        private static string connstring;
-        public static bool DEBUG_MODE = false;
+        public static string connstring;
+        public static string DEBUG_MODE;
         public static string GetString()
         {
-            if (DEBUG_MODE == true)
+            if (DEBUG_MODE == "true")
             {
                 connstring = "https://localhost:44314/";
             }

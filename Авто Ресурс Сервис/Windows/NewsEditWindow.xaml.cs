@@ -37,7 +37,7 @@ namespace Авто_Ресурс_Сервис.Windows
                 this.AllNews.Text = news.AllInfo;
                 this.BaseNews.Text = news.BaseInfo;
                 this.LinkOnNews.Text = news.NewsLinkSrc;
-                this.Id.Text = news.id.ToString();
+                //this.Id.Text = news.id.ToString();
                 string filedata = "C:\\Users\\sasha\\OneDrive\\Изображения\\Saved Pictures\\img.jpg";
                 //using (var stream = File.Create(filedata)) {
                 //    File.WriteAllBytes(filedata, news.Image);
@@ -63,7 +63,7 @@ namespace Авто_Ресурс_Сервис.Windows
                 AllInfo = AllNews.Text,
                 BaseInfo = BaseNews.Text,
                 DateTime = DateTime.Now,
-                id = Convert.ToInt32(Id.Text),
+                //id = Convert.ToInt32(Id.Text),
                 NameNews = NameNews.Text,
                 NewsLinkSrc = LinkOnNews.Text
             };

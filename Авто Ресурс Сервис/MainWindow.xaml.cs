@@ -26,12 +26,22 @@ namespace Авто_Ресурс_Сервис
     public partial class MainWindow : Window
     {
         private List<Tires> tireses;
+        private List<News> newsfromprod;
+        private List<Brends> brendfromprod;
         public MainWindow()
         {
             InitializeComponent();
-            Post post = new Post();
+            Config.DEBUG_MODE = "false";
+            Post post = new Post(this);
             GetNews();
+            TypeMode.Items.Add("false");
+            TypeMode.Items.Add("true");
             Trace.WriteLine(this);
+        }
+
+        public void UpdateMode(string type)
+        {
+            TypeModeSelect.Text = type;
         }
 
         public async Task GetNews()
@@ -42,7 +52,8 @@ namespace Авто_Ресурс_Сервис
                 if (data is Task<string>)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
-                    //Task.WaitAny(data);
+                    string newdata = JsonConvert.SerializeObject(news);
+                    newsfromprod = JsonConvert.DeserializeObject<List<News>>(newdata);
                     data.Dispose();
                     data = null;
                     for (int i = 0; i < news.Count; i++)
@@ -55,15 +66,11 @@ namespace Авто_Ресурс_Сервис
                         {
                             news[i].AllInfo = news[i].AllInfo.Substring(0, 30) + "...";
                         }
-                        news[i].NewsLinkSrc = null;
-                        news[i].ImageMimeTypeOfData = null;
-                        news[i].Image = null;
                     }
                     NewsCount.Text = news.Count.ToString();
                     NewsGrid.ItemsSource = news;
-
                 }
-
+                
             }
             catch (Exception exp)
             {
@@ -297,6 +304,7 @@ namespace Авто_Ресурс_Сервис
 
                     }
                     BrendstGrid.ItemsSource = brends;
+                    brendfromprod = brends;
                 }
             }
             catch (Exception exp)
@@ -422,6 +430,29 @@ namespace Авто_Ресурс_Сервис
                 MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
                 MessageBox.Show(exp.ToString(), "Error", MessageBoxButton.OK);
             }
+        }
+
+        private void TypeMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Config.DEBUG_MODE = TypeMode.SelectedItem.ToString();
+            Post post = new Post(this);
+        }
+
+        private void CollectionSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveNewsCall();
+            
+        }
+
+        private async Task SaveNewsCall()
+        {
+            new NewsReLoadWindow(this, newsfromprod).Show();
+            
+        }
+
+        private void TestSave_Click(object sender, RoutedEventArgs e)
+        {
+            new BrendReLoadWindow(brendfromprod).Show();
         }
     }
 }

@@ -41,9 +41,9 @@ namespace Авто_Ресурс_Сервис.Windows
             var tires = await Task.WhenAny(Post.Send("TiresImages", "GetTiresPictParams"));
             if (tires is Task<string>)
             {
-                List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>((tires as Task<string>).Result);
-                NameTire.ItemsSource = tiresImages.Select(x => x.NameTire).Distinct();
-                TypeTire.ItemsSource = tiresImages.Select(x => x.TypeTire).Distinct();
+                List<Tires> tireses = JsonConvert.DeserializeObject<List<Tires>>((tires as Task<string>).Result);
+                NameTire.ItemsSource = tireses.OrderBy(x=>x.Name).Select(x => x.Name).Distinct();
+                TypeTire.ItemsSource = tireses.Select(x => x.TypeOfTire).Distinct();
             }
         }
 
@@ -63,15 +63,22 @@ namespace Авто_Ресурс_Сервис.Windows
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            TiresImage tiresImage = new TiresImage();
-            tiresImage.NameTire = NameTire.SelectedItem.ToString();
-            tiresImage.TypeTire = TypeTire.SelectedItem.ToString();
-            tiresImage.ImageMimeTypeOfData = fileType;
-            tiresImage.Image = fileName;
-            string str = JsonConvert.SerializeObject(tiresImage);
-            Post.Send("TiresImages", "SaveImg", str);
-            this.Close();
-            (window as MainWindow).GetTiresPic();
+            if (fileName != null)
+            {
+                TiresImage tiresImage = new TiresImage();
+                tiresImage.NameTire = NameTire.SelectedItem.ToString();
+                tiresImage.TypeTire = TypeTire.SelectedItem.ToString();
+                tiresImage.ImageMimeTypeOfData = fileType;
+                tiresImage.Image = fileName;
+                string str = JsonConvert.SerializeObject(tiresImage);
+                Post.Send("TiresImages", "SaveImg", str);
+                this.Close();
+                (window as MainWindow).GetTiresPic();
+            }
+            else
+            {
+                MessageBox.Show("Виберіть зображення!", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }

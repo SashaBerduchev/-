@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Parser\Brends.cs" />
+    <Compile Include="Parser\NewsTestPars.cs" />
     <Compile Include="Parser\TelegramBotUser.cs" />
     <Compile Include="Parser\Tires.cs" />
     <Compile Include="Parser\TiresImage.cs" />
@@ -73,6 +74,9 @@
     <Compile Include="Windows\AddTiresPicWindow.xaml.cs">
       <DependentUpon>AddTiresPicWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\BrendReLoadWindow.xaml.cs">
+      <DependentUpon>BrendReLoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\BrendsAddWindow.xaml.cs">
       <DependentUpon>BrendsAddWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,9 @@
     </Compile>
     <Compile Include="Windows\NewsEditWindow.xaml.cs">
       <DependentUpon>NewsEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewsReLoadWindow.xaml.cs">
+      <DependentUpon>NewsReLoadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TiresInfoEditWindow.xaml.cs">
       <DependentUpon>TiresInfoEditWindow.xaml</DependentUpon>
@@ -107,6 +114,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\BrendReLoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\BrendsAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewsEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewsReLoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
