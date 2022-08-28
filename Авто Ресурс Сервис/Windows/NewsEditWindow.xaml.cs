@@ -63,7 +63,7 @@ namespace Авто_Ресурс_Сервис.Windows
                 AllInfo = AllNews.Text,
                 BaseInfo = BaseNews.Text,
                 DateTime = DateTime.Now,
-                //id = Convert.ToInt32(Id.Text),
+                id = Convert.ToInt32(Id.Text),
                 NameNews = NameNews.Text,
                 NewsLinkSrc = LinkOnNews.Text
             };
