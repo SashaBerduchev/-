@@ -461,5 +461,10 @@ namespace Авто_Ресурс_Сервис
         {
             new TiresImagesReLoadWindow(tiresImagesprod).Show();
         }
+
+        private void SaveNesInfo_Click(object sender, RoutedEventArgs e)
+        {
+            new SaveNesInfoWindow().Show();
+        }
     }
 }

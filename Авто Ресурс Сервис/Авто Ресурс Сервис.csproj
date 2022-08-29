@@ -62,7 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Parser\Advantages.cs" />
     <Compile Include="Parser\Brends.cs" />
+    <Compile Include="Parser\Guarantee.cs" />
     <Compile Include="Parser\NewsTestPars.cs" />
     <Compile Include="Parser\TelegramBotUser.cs" />
     <Compile Include="Parser\Tires.cs" />
@@ -88,6 +90,9 @@
     </Compile>
     <Compile Include="Windows\NewsReLoadWindow.xaml.cs">
       <DependentUpon>NewsReLoadWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SaveNesInfoWindow.xaml.cs">
+      <DependentUpon>SaveNesInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TiresImagesReLoadWindow.xaml.cs">
       <DependentUpon>TiresImagesReLoadWindow.xaml</DependentUpon>
@@ -134,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewsReLoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SaveNesInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

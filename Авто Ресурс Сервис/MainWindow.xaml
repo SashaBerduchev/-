@@ -113,6 +113,8 @@
             </TabItem>
 
         </TabControl>
+        <Button x:Name="SaveNesInfo" Grid.Column="5" Content="Переніс до інфо" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top" Height="45" Width="98" Click="SaveNesInfo_Click"/>
+
     </Grid>
 
 </Window>
