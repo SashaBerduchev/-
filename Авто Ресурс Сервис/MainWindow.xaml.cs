@@ -32,7 +32,7 @@ namespace Авто_Ресурс_Сервис
         public MainWindow()
         {
             InitializeComponent();
-            Config.DEBUG_MODE = "true";
+            Config.DEBUG_MODE = "false";
             Post post = new Post(this);
             GetNews();
             TypeMode.Items.Add("false");

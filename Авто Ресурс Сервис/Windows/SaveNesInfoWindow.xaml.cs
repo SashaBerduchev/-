@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -24,6 +25,8 @@ namespace Авто_Ресурс_Сервис.Windows
     {
         List<Advantages> Advantages;
         List<Guarantee> Guarantees;
+        List<Tires> tires;
+        List<TiresInformation> tireinf;
         public SaveNesInfoWindow()
         {
             InitializeComponent();
@@ -31,6 +34,27 @@ namespace Авто_Ресурс_Сервис.Windows
             TypeMode.Items.Add("true");
             GetGuaranties();
             GetAdvanteges();
+            GetTires();
+            GetTiresInf();
+        }
+
+        private async Task GetTiresInf()
+        {
+            var tires = await Task.WhenAny(Post.Send("TiresInformations", "GetTiresInfo"));
+            if (tires is Task<string>)
+            {
+                tireinf = JsonConvert.DeserializeObject<List<TiresInformation>>((tires as Task<string>).Result);
+            }
+        }
+
+        private async Task GetTires()
+        {
+            var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"));
+            if (data is Task<string>)
+            {
+                tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
+                
+            }
         }
 
         private async Task GetAdvanteges()
@@ -71,6 +95,13 @@ namespace Авто_Ресурс_Сервис.Windows
                     {
                         Post.Send("Guarantees", "SaveGua", JsonConvert.SerializeObject(Guarantees[j]));
                     }
+                    for (int j = 0; j < tireinf.Count; j++)
+                    {
+                        Post.Send("TiresInformations", "SaveInfo", JsonConvert.SerializeObject(tireinf[j]));
+                    }
+                    
+                    Post.Send("Tires", "SaveAllClientTires", JsonConvert.SerializeObject(tires));
+                    
                 }
                 this.Close();
             }catch(Exception exp)
