@@ -466,5 +466,32 @@ namespace Авто_Ресурс_Сервис
         {
             new SaveNesInfoWindow().Show();
         }
+
+        private void NewsGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                OpenNewsEditWindows();
+            }
+        }
+        private async Task OpenNewsEditWindows()
+        {
+            try
+            {
+                var item = NewsGrid.SelectedItems;
+                for (int i = 0; i < item.Count; i++)
+                {
+                    var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (item[i] as News).NameNews), Task.Delay(500));
+                    News newsselect = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
+                    new NewsEditWindow(this, newsselect).Show();
+                }
+                
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Ошибка подключения к серверу", "Error", MessageBoxButton.OK);
+            }
+
+        }
     }
 }
