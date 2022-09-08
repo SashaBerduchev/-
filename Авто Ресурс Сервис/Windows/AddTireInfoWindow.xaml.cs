@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace Авто_Ресурс_Сервис.Windows
         public AddTireInfoWindow(Window window, List<Tires> tiresInformation)
         {
             InitializeComponent();
+            Trace.WriteLine(this);
             windows = window;
             information = tiresInformation;
             BrendCombo.ItemsSource = information.Select(x=>x.Name).ToList().Distinct();

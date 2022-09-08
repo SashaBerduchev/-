@@ -32,6 +32,7 @@ namespace Авто_Ресурс_Сервис.Windows
         {
             InitializeComponent();
             this.window = window;
+            Trace.WriteLine(this);
         }
 
         private void AddImage_Click(object sender, RoutedEventArgs e)

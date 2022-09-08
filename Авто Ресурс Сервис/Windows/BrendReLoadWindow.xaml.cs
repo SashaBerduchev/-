@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace Авто_Ресурс_Сервис.Windows
             TypeMode.Items.Add("false");
             TypeMode.Items.Add("true");
             brendssave = brends;
+            Trace.WriteLine(this);
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

@@ -29,6 +29,7 @@ namespace Авто_Ресурс_Сервис.Windows
         public NewsEditWindow(Window window, News news)
         {
             InitializeComponent();
+            Trace.WriteLine(this);
             windows = window;
             newsadd = news;
             try
