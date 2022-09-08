@@ -27,6 +27,7 @@ namespace Авто_Ресурс_Сервис.Windows
         List<Guarantee> Guarantees;
         List<Tires> tires;
         List<TiresInformation> tireinf;
+        List<MainImages> Images;
         public SaveNesInfoWindow()
         {
             InitializeComponent();
@@ -36,6 +37,7 @@ namespace Авто_Ресурс_Сервис.Windows
             GetAdvanteges();
             GetTires();
             GetTiresInf();
+            GetMainImg();
         }
 
         private async Task GetTiresInf()
@@ -69,6 +71,11 @@ namespace Авто_Ресурс_Сервис.Windows
             var gua = await Task.WhenAny(Post.Send("Guarantees", "GetGuaranties"));
             Guarantees = JsonConvert.DeserializeObject<List<Guarantee>>((gua as Task<string>).Result);
         }
+        private async Task GetMainImg()
+        {
+            var img = await Task.WhenAny(Post.Send("MainImages", "GetImages"));
+            Images = JsonConvert.DeserializeObject<List<MainImages>>((img as Task<string>).Result);
+        }
 
         public void UpdateMode(string type)
         {
@@ -99,7 +106,11 @@ namespace Авто_Ресурс_Сервис.Windows
                     {
                         Post.Send("TiresInformations", "SaveInfo", JsonConvert.SerializeObject(tireinf[j]));
                     }
-                    
+                    for (int j = 0; j < Images.Count; j++)
+                    {
+                        Post.Send("MainImages", "MainImageSave", JsonConvert.SerializeObject(Images[j]));
+                    }
+
                     Post.Send("Tires", "SaveAllClientTires", JsonConvert.SerializeObject(tires));
                     
                 }

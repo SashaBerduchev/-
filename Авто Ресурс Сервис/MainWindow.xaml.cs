@@ -32,11 +32,11 @@ namespace Авто_Ресурс_Сервис
         public MainWindow()
         {
             InitializeComponent();
-            Config.DEBUG_MODE = "false";
+            Config.DEBUG_MODE = false.ToString();
             Post post = new Post(this);
             GetNews();
-            TypeMode.Items.Add("false");
-            TypeMode.Items.Add("true");
+            TypeMode.Items.Add(true.ToString());
+            TypeMode.Items.Add(false.ToString());
             Trace.WriteLine(this);
         }
 
@@ -49,13 +49,12 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                Task data = await Task.WhenAny(Post.Send("News", "GetNews"));
-                if (data is Task<string>)
+                var data = await Post.Send("News", "GetNews");
+                if (data != null)
                 {
-                    List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
+                    List<News> news = JsonConvert.DeserializeObject<List<News>>(data);
                     string newdata = JsonConvert.SerializeObject(news);
                     newsfromprod = JsonConvert.DeserializeObject<List<News>>(newdata);
-                    data.Dispose();
                     data = null;
                     for (int i = 0; i < news.Count; i++)
                     {
@@ -90,10 +89,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("News", "GetNews"), Task.Delay(5000));
-                if (data is Task<string>)
+                var data = await Post.Send("News", "GetNews");
+                if (data !=null)
                 {
-                    List<News> news = JsonConvert.DeserializeObject<List<News>>((data as Task<string>).Result);
+                    List<News> news = JsonConvert.DeserializeObject<List<News>>(data);
                     for (int i = 0; i < news.Count; i++)
                     {
                         if (news[i].BaseInfo.Length > 20)
@@ -144,10 +143,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var data = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"));
-                if (data is Task<string>)
+                var data = await Post.Send("Tires", "GetTiresClient");
+                if (data != null)
                 {
-                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>((data as Task<string>).Result);
+                    List<Tires> tires = JsonConvert.DeserializeObject<List<Tires>>(data);
                     TiresGrid.ItemsSource = tires;
                     TiresCount.Text = tires.Count.ToString();
                     BrendName.ItemsSource = tires.Select(x => x.Name).ToList();
@@ -206,7 +205,7 @@ namespace Авто_Ресурс_Сервис
 
         private async Task GetTgUser()
         {
-            var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(500));
+            var teledata = await Post.Send("Home", "TelegramGetUser");
             Trace.WriteLine(teledata);
         }
 
@@ -219,8 +218,8 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var teledata = await Task.WhenAny(Post.Send("Home", "TelegramGetUser"), Task.Delay(500));
-                TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TelegramBotUser>>((teledata as Task<string>).Result);
+                var teledata = await Post.Send("Home", "TelegramGetUser");
+                TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TelegramBotUser>>(teledata);
             }
             catch (Exception exp)
             {
@@ -239,8 +238,8 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (NewsGrid.SelectedItem as News).NameNews), Task.Delay(500));
-                News item = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
+                var news = await Post.Send("News", "GetNewsSelect", JsonConvert.SerializeObject(NewsGrid.SelectedItem as News));
+                News item = JsonConvert.DeserializeObject<News>(news);
                 new NewsEditWindow(this, item).Show();
             }
             catch (Exception exp)
@@ -270,10 +269,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var tires = await Task.WhenAny(Post.Send("TiresImages", "GetTiresPict"), Task.Delay(5000));
-                if (tires is Task<string>)
+                var tires = await Post.Send("TiresImages", "GetTiresPict");
+                if (tires != null)
                 {
-                    List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>((tires as Task<string>).Result);
+                    List<TiresImage> tiresImages = JsonConvert.DeserializeObject<List<TiresImage>>(tires);
                     TiresPictGrid.ItemsSource = tiresImages;
                     tiresImagesprod = tiresImages;
                 }
@@ -293,10 +292,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var tires = await Task.WhenAny(Post.Send("Brends", "GetBrends"));
-                if (tires is Task<string>)
+                var tires = await Post.Send("Brends", "GetBrends");
+                if (tires != null)
                 {
-                    List<Brends> brends = JsonConvert.DeserializeObject<List<Brends>>((tires as Task<string>).Result);
+                    List<Brends> brends = JsonConvert.DeserializeObject<List<Brends>>(tires);
                     for (int i = 0; i < brends.Count; i++)
                     {
                         if (brends[i].Information.Length > 200)
@@ -335,10 +334,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var tires = await Task.WhenAny(Post.Send("Tires", "GetBrendClientTires", BrendName.SelectedItem.ToString())); ;
-                if (tires is Task<string>)
+                var tires = await Post.Send("Tires", "GetBrendClientTires", BrendName.SelectedItem.ToString());
+                if (tires != null)
                 {
-                    List<Tires> tire = JsonConvert.DeserializeObject<List<Tires>>((tires as Task<string>).Result);
+                    List<Tires> tire = JsonConvert.DeserializeObject<List<Tires>>(tires);
                     TiresGrid.ItemsSource = tire;
                     TiresCount.Text = tire.Count.ToString();
                     //BrendName.ItemsSource = tire.Select(x => x.Name).ToList();
@@ -361,10 +360,10 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var tires = await Task.WhenAny(Post.Send("TiresInformations", "GetTiresInfo"));
-                if (tires is Task<string>)
+                var tires = await Post.Send("TiresInformations", "GetTiresInfo");
+                if (tires != null)
                 {
-                    List<TiresInformation> tire = JsonConvert.DeserializeObject<List<TiresInformation>>((tires as Task<string>).Result);
+                    List<TiresInformation> tire = JsonConvert.DeserializeObject<List<TiresInformation>>(tires);
                     for (int i = 0; i < tire.Count; i++)
                     {
                         if (tire[i].Info.Length > 50)
@@ -375,7 +374,6 @@ namespace Авто_Ресурс_Сервис
                     TiresInfo.ItemsSource = tire;
                     //TiresCount.Text = tire.Count.ToString();
                     //BrendName.ItemsSource = tire.Select(x => x.Name).ToList();
-                    tires.Dispose();
                 }
 
             }
@@ -400,8 +398,8 @@ namespace Авто_Ресурс_Сервис
         {
             try
             {
-                var news = await Task.WhenAny(Post.Send("Tires", "GetTiresClient"));
-                List<Tires> item = JsonConvert.DeserializeObject<List<Tires>>((news as Task<string>).Result);
+                var news = await Post.Send("Tires", "GetTiresClient");
+                List<Tires> item = JsonConvert.DeserializeObject<List<Tires>>(news);
                 new AddTireInfoWindow(this, item).Show();
             }
             catch (Exception exp)
@@ -481,8 +479,8 @@ namespace Авто_Ресурс_Сервис
                 var item = NewsGrid.SelectedItems;
                 for (int i = 0; i < item.Count; i++)
                 {
-                    var news = await Task.WhenAny(Post.Send("News", "GetNewsSelect", (item[i] as News).NameNews), Task.Delay(500));
-                    News newsselect = JsonConvert.DeserializeObject<News>((news as Task<string>).Result);
+                    var news = await Post.Send("News", "GetNewsSelect", (item[i] as News).NameNews);
+                    News newsselect = JsonConvert.DeserializeObject<News>(news);
                     new NewsEditWindow(this, newsselect).Show();
                 }
                 

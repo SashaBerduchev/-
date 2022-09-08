@@ -39,9 +39,10 @@ namespace Авто_Ресурс_Сервис.Http
                     var poststr = data.Trim('/');
                     StringContent stringContent = new StringContent(poststr);
                     HttpResponseMessage request = await client.PostAsync(constr, new StringContent(new JavaScriptSerializer().Serialize(data), Encoding.UTF8, "application/json"));
-                    var ddd = request.Content.ReadAsStringAsync().Result;
+                    var ddd = await request.Content.ReadAsStringAsync();
+                    Trace.WriteLine(request);
                     Trace.WriteLine(ddd);
-                    return request.Content.ReadAsStringAsync().Result;
+                    return ddd;
                 }
                 else
                 {
@@ -49,7 +50,6 @@ namespace Авто_Ресурс_Сервис.Http
                     response.EnsureSuccessStatusCode();
                     Trace.WriteLine("POST  " + response);
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    Trace.WriteLine("RESPONSE" + responseBody.ToString());
                     return responseBody;
                 }
                 return "";
