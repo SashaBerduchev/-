@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Авто_Ресурс_Сервис.Parser
 {
-    class TelegramBotUser
+    public class TeleGramChats
     {
         public int id { get; set; }
         public long idChat { get; set; }

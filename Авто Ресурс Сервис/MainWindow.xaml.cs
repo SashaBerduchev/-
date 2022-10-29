@@ -3,17 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Авто_Ресурс_Сервис.Http;
 using Авто_Ресурс_Сервис.Parser;
 using Авто_Ресурс_Сервис.Windows;
@@ -70,7 +63,7 @@ namespace Авто_Ресурс_Сервис
                     NewsCount.Text = news.Count.ToString();
                     NewsGrid.ItemsSource = news;
                 }
-                
+
             }
             catch (Exception exp)
             {
@@ -90,7 +83,7 @@ namespace Авто_Ресурс_Сервис
             try
             {
                 var data = await Post.Send("News", "GetNews");
-                if (data !=null)
+                if (data != null)
                 {
                     List<News> news = JsonConvert.DeserializeObject<List<News>>(data);
                     for (int i = 0; i < news.Count; i++)
@@ -205,8 +198,9 @@ namespace Авто_Ресурс_Сервис
 
         private async Task GetTgUser()
         {
-            var teledata = await Post.Send("Home", "TelegramGetUser");
-            Trace.WriteLine(teledata);
+            //var teledata = await Post.Send("Home", "TelegramGetUser", JsonConvert.SerializeObject(item));
+            TeleGramChats tele = (TeleGramChats)TelegramGrid.SelectedItem;
+            new TelegramSendMessageWindow(tele).Show();
         }
 
         private void TelegramUserUpdate_Click(object sender, RoutedEventArgs e)
@@ -219,7 +213,7 @@ namespace Авто_Ресурс_Сервис
             try
             {
                 var teledata = await Post.Send("Home", "TelegramGetUser");
-                TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TelegramBotUser>>(teledata);
+                TelegramGrid.ItemsSource = JsonConvert.DeserializeObject<List<TeleGramChats>>(teledata);
             }
             catch (Exception exp)
             {
@@ -368,7 +362,7 @@ namespace Авто_Ресурс_Сервис
                     {
                         if (tire[i].Info.Length > 50)
                         {
-                            tire[i].Info = tire[i].Info.Substring(0, 50)+"...";
+                            tire[i].Info = tire[i].Info.Substring(0, 50) + "...";
                         }
                     }
                     TiresInfo.ItemsSource = tire;
@@ -418,12 +412,12 @@ namespace Авто_Ресурс_Сервис
             try
             {
                 Task data = await Task.WhenAny(Post.Send("TiresInformations", "GetTireInfoSelect", JsonConvert.SerializeObject(TiresInfo.SelectedItem as TiresInformation)));
-                if(data is Task<string>)
+                if (data is Task<string>)
                 {
                     TiresInformation tiresInformation = JsonConvert.DeserializeObject<TiresInformation>((data as Task<string>).Result);
                     new TiresInfoEditWindow(this, tiresInformation).Show();
                 }
-                
+
             }
             catch (Exception exp)
             {
@@ -441,13 +435,13 @@ namespace Авто_Ресурс_Сервис
         private void CollectionSave_Click(object sender, RoutedEventArgs e)
         {
             SaveNewsCall();
-            
+
         }
 
         private async Task SaveNewsCall()
         {
             new NewsReLoadWindow(this, newsfromprod).Show();
-            
+
         }
 
         private void TestSave_Click(object sender, RoutedEventArgs e)
@@ -467,7 +461,7 @@ namespace Авто_Ресурс_Сервис
 
         private void NewsGrid_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 OpenNewsEditWindows();
             }
@@ -483,7 +477,7 @@ namespace Авто_Ресурс_Сервис
                     News newsselect = JsonConvert.DeserializeObject<News>(news);
                     new NewsEditWindow(this, newsselect).Show();
                 }
-                
+
             }
             catch (Exception exp)
             {
